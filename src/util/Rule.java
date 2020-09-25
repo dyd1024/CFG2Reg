@@ -14,7 +14,7 @@ public class Rule {
 
     public  Rule(String rule){
         this.leftSide = String.valueOf(rule.charAt(0));
-        this.rightSide = rule.substring(2);
+        this.rightSide = rule.substring(3);
     }
 
 
