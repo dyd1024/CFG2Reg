@@ -1,14 +1,20 @@
-package util;
+package de.profile.regular.util;
 
 import java.io.*;
 import java.util.ArrayList;
 
+/*
+解析文件得到上下文无关文法的条目
+grammar::解析文件得到的产生式
+ */
 
 public class PhraseFile {
-    //解析文件得到上下文无关文法的条目
-    //grammar::解析文件得到的产生式
 
-    public ArrayList<String> grammar = new ArrayList<>();
+    private ArrayList<String> grammar = new ArrayList<>();
+
+    public ArrayList<String> getGrammar() {
+        return grammar;
+    }
 
     public  PhraseFile(File file){
         try {

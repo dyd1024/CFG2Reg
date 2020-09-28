@@ -1,6 +1,7 @@
-package com.company;
-import util.LRItem;
-import util.PhraseFile;
+package de.profile.regular;
+
+import de.profile.regular.util.LRItem;
+import de.profile.regular.util.PhraseFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class Main {
         if(filePath != null){
             File file = new File(filePath);
             PhraseFile phraseFile = new PhraseFile(file);                                       //解析输入文件
-            LRItem lrItem = new LRItem(phraseFile.grammar);                                     //打点
+            LRItem lrItem = new LRItem(phraseFile.getGrammar());                                     //打点
         }
 
     }

@@ -1,23 +1,37 @@
-package util;
+package de.profile.regular.util;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 
-//inPut:ArrayList<String>，outPut:ArrayList<String> item
-//non_Terminal::终结符集合
-//alphabet::字母表集合
+
+/*
+inPut:ArrayList<String>，
+result:ArrayList<String> item
+non_Terminal::终结符集合
+alphabet::字母表集合
+ */
 
 public class LRItem {
-    ArrayList<String> item = new ArrayList<>();
-    public HashSet<String> non_Terminal = new HashSet<>();
-    public HashSet<String> alphabet = new HashSet<>();
+    private ArrayList<String> item = new ArrayList<>();
+    private HashSet<String> non_Terminal = new HashSet<>();
+    private HashSet<String> alphabet = new HashSet<>();
+
+    public ArrayList<String> getItem(){
+        return this.item;
+    }
+
+    public HashSet<String> getNon_Terminal() {
+        return non_Terminal;
+    }
+
+    public HashSet<String> getAlphabet() {
+        return alphabet;
+    }
 
     public LRItem(ArrayList<String> grammar){
         phrase(grammar);
         dot(grammar);
         System.out.println(item);
-
     }
 
 
@@ -29,14 +43,11 @@ alphabet::字母表集合
  */
     public void phrase(ArrayList<String> grammar){
 
-        Iterator i = grammar.iterator();                                                                                //得到解析输入文件的结果，Iterator遍历。
-        int line = 0;
-        while(i.hasNext()){
-            String s = grammar.get(line);
+        for(String s:grammar){
             if(s.equals("")){
                 break;
             }
-            non_Terminal.add(s.substring(0,1));                                                         //保存所有的非终结符
+            non_Terminal.add(s.substring(0,1));                                                                         //保存所有的非终结符
             alphabet.add(s.substring(0,1));
 
             if(s.substring(3).equals("epsilon")){
@@ -49,24 +60,24 @@ alphabet::字母表集合
                     }
                 }
             }
-            i.next();
-            line++;
         }
+
         System.out.println(non_Terminal);
         System.out.println(alphabet);
     }
 
-
+/*
+将所有产生式打点
+input::ArrayList<String> grammar
+result:ArrayList<String> item
+ */
 
     public void dot(ArrayList<String> grammar){
 
         System.out.println(grammar);
         item.add("S'->.S");                                                                                              //开始符号默认为S
         item.add("S'->S.");
-        Iterator i = grammar.iterator();
-        int line = 0;
-        while(i.hasNext()){
-            String s = grammar.get(line);
+        for(String s:grammar){
             if(s.equals("")){
                 break;
             }
@@ -79,14 +90,12 @@ alphabet::字母表集合
                 StringBuffer stringBuffer = new StringBuffer(s);
                 item.add(stringBuffer.insert(index, '.').toString());
             }
-            i.next();
-            line++;
         }
+
     }
 }
 
 
 //非终结符的集合
 //从开始符号出发，得到S'->S
-
 //子集构造怎么搞  NFA确定化
