@@ -17,7 +17,6 @@ public class Rule {
         this.rightSide = rule.substring(3);
     }
 
-
     public String getLeftSide(){
         return leftSide;
     }
