@@ -1,7 +1,7 @@
 package de.profile.regular.Automata;
 
 public class FiniteTransition {
-    private char c;
+    private char c;                                                           //%代表空串转移
     private FiniteState state;
 
     public FiniteTransition(final FiniteState state,final char c){

@@ -2,6 +2,7 @@ package de.profile.regular.Automata;
 import de.profile.regular.State;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,13 +16,26 @@ list::打点的自动机子集构造时需要保存之前的状态内容
 public class FiniteState extends State{
 
     public static final FiniteState STATE_NULL = new FiniteState("null");
-    private boolean isFinal = false;
+    private boolean isFinal = false;        //是否是终结状态
+    private boolean isReduce = false;       //是否是可规约状态
     private List<FiniteTransition> transitions;
-    private ArrayList<String> list = new ArrayList<String>();
+    private HashSet<String> list = new HashSet<String>();
+
+    public HashSet<String> getList() {
+        return list;
+    }
 
     public FiniteState(String name) {
         super(name);
         this.transitions = new LinkedList<FiniteTransition>();
+    }
+
+    public boolean isReduce() {
+        return isReduce;
+    }
+
+    public void setReduce(boolean reduce) {
+        isReduce = reduce;
     }
 
     public void setFinal(){
