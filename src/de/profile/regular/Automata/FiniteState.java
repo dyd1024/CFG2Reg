@@ -19,10 +19,14 @@ public class FiniteState extends State{
     private boolean isFinal = false;        //是否是终结状态
     private boolean isReduce = false;       //是否是可规约状态
     private List<FiniteTransition> transitions;
-    private HashSet<String> list = new HashSet<String>();
+    private ArrayList<String> list = new ArrayList<>();
 
-    public HashSet<String> getList() {
+    public ArrayList<String> getList() {
         return list;
+    }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
     }
 
     public FiniteState(String name) {
@@ -34,8 +38,8 @@ public class FiniteState extends State{
         return isReduce;
     }
 
-    public void setReduce(boolean reduce) {
-        isReduce = reduce;
+    public void setReduce() {
+        isReduce = true;
     }
 
     public void setFinal(){

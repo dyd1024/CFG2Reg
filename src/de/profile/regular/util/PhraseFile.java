@@ -21,7 +21,7 @@ public class PhraseFile {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String tempString = null;                                                                               // 一次读入一行，直到读入null为文件结束
 
-            while ((tempString = reader.readLine()) != null) {                                                     //TODO没有判断文件输入是否合法，之后再补
+            while ((tempString = reader.readLine()) != null) {                                                     // TODO 没有判断文件输入是否合法，之后再补
 
                 grammar.add(tempString);
             }
