@@ -17,9 +17,10 @@ public class Main {
         String filePath = args[0];
         if(filePath != null){
             File file = new File(filePath);
-            PhraseFile phraseFile = new PhraseFile(file);                     //解析输入文件
-            LRItem lrItem = new LRItem(phraseFile.getGrammar());              //打点
-            FiniteAutomata automata = new FiniteAutomata(lrItem.getItem(),lrItem.getNon_Terminal());
+            PhraseFile phraseFile = new PhraseFile(file);                                              //解析输入文件
+            LRItem lrItem = new LRItem(phraseFile.getGrammar());                                       //打点
+            FiniteAutomata automata = new FiniteAutomata(lrItem.getItem(),lrItem.getNon_Terminal());   //得到由打点的式子构成的自动机
+            automata.print(automata);
 
         }
 

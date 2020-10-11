@@ -18,8 +18,8 @@ public class FiniteState extends State{
     public static final FiniteState STATE_NULL = new FiniteState("null");
     private boolean isFinal = false;        //是否是终结状态
     private boolean isReduce = false;       //是否是可规约状态
-    private List<FiniteTransition> transitions;
-    private ArrayList<String> list = new ArrayList<>();
+    private List<FiniteTransition> transitions;    //转移
+    private ArrayList<String> list = new ArrayList<>();   //保存的打点状态集合
 
     public ArrayList<String> getList() {
         return list;
@@ -27,6 +27,10 @@ public class FiniteState extends State{
 
     public void setList(ArrayList<String> list) {
         this.list = list;
+    }
+
+    public List<FiniteTransition> getTransitions() {
+        return transitions;
     }
 
     public FiniteState(String name) {
