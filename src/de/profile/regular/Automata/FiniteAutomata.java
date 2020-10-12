@@ -2,7 +2,6 @@ package de.profile.regular.Automata;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class FiniteAutomata {
     private FiniteState initial;                    //起始状态，链表的开始   作为自动机的头结点
@@ -10,6 +9,7 @@ public class FiniteAutomata {
     private ArrayList<String> item;                 //打点产生式的集合
     private static int count = 0;                   //状态计数
     private ArrayList<FiniteState>  states;         //状态集合
+    private FiniteAutomata DFAutomata;              //确定化得到的DFA
 
     public FiniteAutomata(FiniteState initial) {
         this.initial = initial;
@@ -29,7 +29,7 @@ public class FiniteAutomata {
     public FiniteAutomata(ArrayList<String> item, HashSet<String> non_Terminal){
         this.item = item;
         this.non_Terminal = non_Terminal;
-        construction();
+        this.construction();
     }
 
 
@@ -120,12 +120,13 @@ public class FiniteAutomata {
 //    }
 
 
-/*
+    /*
 
-碑：： 10-11-2020
-问题在于：读取一个字符之后，若转移到已经存在的状态，没法识别，需要引入新的变量来保存     下一步：对每两个状态检查添加转移
-先写成非确定自动机的形式    在通过子集构造
- */
+    碑：： 10-11-2020
+
+    问题在于：读取一个字符之后，若转移到已经存在的状态，没法识别，需要引入新的变量来保存     下一步：对每两个状态检查添加转移
+    先写成非确定自动机的形式    在通过子集构造
+     */
 
 //    public void addTransition(FiniteState state){
 //        if (state.getList().size()>1){
@@ -178,6 +179,10 @@ public class FiniteAutomata {
 //    }
 
 
+    /*
+    通过遍历所有状态，为每两个需要添加转移的状态之间添加转移
+     */
+
     public void construct(ArrayList<String> item){
         ArrayList<FiniteState> stateList = new ArrayList<>();
         for (String rule : item){
@@ -225,6 +230,26 @@ public class FiniteAutomata {
     }
 
 
+    /*
+    将得到的NFA子集构造得到DFA
+     */
+
+    public void deterministic(FiniteAutomata automata){
+        DFAutomata = new FiniteAutomata(automata.initial);
+
+    }
+
+
+
+    /*
+    获取"."后面的字符
+    */
+
+    public String getTran(String s){
+        int index = s.indexOf(".");
+        String temp = s.substring(index+1, index+2);
+        return temp;
+    }
 
     /*
     得到左侧的非终结符
@@ -274,16 +299,6 @@ public class FiniteAutomata {
 //        return ary1.equals(ary2);
     }
 
-    /*
-    获取.后面的字符
-    */
-
-    public String getTran(String s){
-        int index = s.indexOf(".");
-        String temp = s.substring(index+1, index+2);
-        return temp;
-    }
-
 
     /*
     打印出自动机，只打印了转移，还没加初始状态和接收状态  以及字母表   TODO
@@ -295,31 +310,8 @@ public class FiniteAutomata {
                 String nextName = transition.getState().getName();
                 System.out.println(name + "--" + transition.getChar() + "-->" + nextName);
             }
-
         }
-
-//        FiniteState state = automata.getInitial();
-//        print(state);
     }
-
-//    public static void print(FiniteState state){
-//        String name = state.getName();
-//        System.out.println(name + ":::" + state.getList().toString());
-//        if (!state.getTransitions().isEmpty()){
-//            for(FiniteTransition transition : state.getTransitions()){
-//                String nextName = transition.getState().getName();
-//                System.out.println(name + "--" + transition.getChar() + "-->" + nextName);
-//                if(name.equals(nextName)){
-//                    continue;
-//                }
-//                List<FiniteState> list = state.getState(transition.getChar());
-//                for (FiniteState temp : list){
-//                    print(temp);
-//                }
-//            }
-//        }
-//    }
-
 
 
 }
