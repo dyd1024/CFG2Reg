@@ -8,6 +8,9 @@ import de.profile.regular.util.PhraseFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main {
 
@@ -70,6 +73,8 @@ public class Main {
 
         BigState state = new BigState(varList,funList);
         state.assign_update("x=y");
+
     }
+
 
 }
